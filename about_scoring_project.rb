@@ -31,6 +31,50 @@ require File.expand_path(File.dirname(__FILE__) + '/edgecase')
 
 def score(dice)
   # You need to write this method
+  sum = 0;
+  array_num = [0,0,0,0,0,0]
+  dice.each do |item|
+  array_num[item-1] = array_num[item-1] + 1
+  end
+  # First Counting and storing each number in a array
+  # Now Defining multipliers
+  
+  i=0
+   while(i<=5)
+    trip_co=0
+    nom_co=0
+   
+    #Process triple counts
+    if(i==0 && array_num[i]>=3)
+	trip_co=1000
+	array_num[i]=array_num[i]-3
+    elsif(array_num[i]>=3)
+	trip_co=100
+	array_num[i] = array_num[i]-3
+    else
+	trip_co=0
+    end
+
+    if(i==0)
+	nom_co=100
+    end
+
+    if(i==4)
+	nom_co=10
+    end
+
+	sum+=(i+1)*trip_co
+	sum+=array_num[i]*(i+1)*nom_co
+
+
+   
+	i=i+1   
+   end  
+
+  
+
+return sum
+  
 end
 
 class AboutScoringProject < EdgeCase::Koan
