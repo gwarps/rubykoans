@@ -6,6 +6,46 @@ require File.expand_path(File.dirname(__FILE__) + '/edgecase')
 #   code ...
 # end
 
+class DiceSet
+ 
+ def set_array_val(array_p)
+  @array_val = array_p
+ end
+
+ def get_array_val
+  return @array_val
+ end
+
+ def array_val
+  @array_val = []
+ end
+
+ 
+
+ def roll(num)
+  array_old = self.get_array_val
+  array_new = Array.new
+
+  i=0
+  while i<num do
+   num_gen = rand(6)+1
+   array_new<<num_gen
+   i = i+1
+  end
+
+  if array_new==@array_val
+   self.roll(num)
+  else
+   @array_val = array_new
+  end
+
+ end
+
+ def values
+  return @array_val
+ end
+end
+
 class AboutDiceProject < EdgeCase::Koan
   def test_can_create_a_dice_set
     dice = DiceSet.new
